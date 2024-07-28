@@ -48,7 +48,14 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     // navigation component dependency
-    implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
-    implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+
+    //intuit - changing for screen sizes
+    implementation(libs.sdp.android)
+    implementation(libs.ssp.android)
+
+    //gif - will show loading animation
+    implementation(libs.android.gif.drawable)
 
 }
