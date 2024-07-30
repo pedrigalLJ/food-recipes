@@ -1,4 +1,4 @@
-package com.example.foodrecipe
+package com.example.foodrecipe.activities
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
@@ -7,8 +7,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
+import com.example.foodrecipe.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
