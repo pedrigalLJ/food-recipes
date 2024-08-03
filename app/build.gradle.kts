@@ -60,7 +60,7 @@ dependencies {
 
     // retrofit - responsible for converting json to kotlin objecta
     implementation(libs.retrofit)
-    implementation (libs.converter.gson)
+    implementation(libs.converter.gson)
 
     // glide - the one who will get images from internet and  put the image in the ImageView
     implementation(libs.glide)
@@ -68,4 +68,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    //videoModel MVVM
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.kotlinx.coroutines.android)
 }
