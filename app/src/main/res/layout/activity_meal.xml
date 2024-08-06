@@ -51,7 +51,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_anchor="@+id/img_youtube"
+        app:layout_anchor="@+id/app_bar"
         app:layout_anchorGravity="end|top"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
