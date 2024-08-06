@@ -3,8 +3,8 @@ package com.example.foodrecipe.activities
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.View
 import android.view.View.VISIBLE
+import android.view.View.INVISIBLE
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -15,7 +15,6 @@ import com.bumptech.glide.Glide
 import com.example.foodrecipe.R
 import com.example.foodrecipe.databinding.ActivityMealBinding
 import com.example.foodrecipe.fragments.HomeFragment
-import com.example.foodrecipe.viewmodel.HomeViewModel
 import com.example.foodrecipe.viewmodel.MealViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -70,7 +69,7 @@ class MealActivity : AppCompatActivity() {
                 meal?.let {
                     binding.tvCategory.text = "Category: ${meal.strCategory}"
                     binding.tvArea.text = "Area: ${meal.strArea}"
-                    binding.tvInstructionsDetails.text = meal.strInstructions
+                    binding.tvInstructionDetails.text = meal.strInstructions
                     mealYoutubeLink = meal.strYoutube
                 }
 
@@ -81,7 +80,7 @@ class MealActivity : AppCompatActivity() {
     private fun setInformationInView() {
         Glide.with(applicationContext)
             .load(mealThumb)
-            .into(binding.imageMealDetail)
+            .into(binding.imgMealDetails)
 
         binding.collapsingToolbar.title = mealName
         binding.collapsingToolbar.setCollapsedTitleTextColor(resources.getColor(R.color.white))
@@ -97,21 +96,21 @@ class MealActivity : AppCompatActivity() {
 
     private fun loadingCase() {
         binding.progressBar.visibility = VISIBLE
-        binding.tvCategory.visibility = View.INVISIBLE
-        binding.tvArea.visibility = View.INVISIBLE
-        binding.btnFavorites.visibility = View.INVISIBLE
-        binding.tvInstructionsLabel.visibility = View.INVISIBLE
-        binding.tvInstructionsDetails.visibility = View.INVISIBLE
-        binding.imgYoutube.visibility = View.INVISIBLE
+        binding.tvCategory.visibility = INVISIBLE
+        binding.tvArea.visibility = INVISIBLE
+        binding.btnAddFavorite.visibility = INVISIBLE
+        binding.tvInstructionLabel.visibility = INVISIBLE
+        binding.tvInstructionDetails.visibility = INVISIBLE
+        binding.imgYoutube.visibility = INVISIBLE
     }
 
     private fun onResponseCase() {
-        binding.progressBar.visibility = View.INVISIBLE
+        binding.progressBar.visibility = INVISIBLE
         binding.tvCategory.visibility = VISIBLE
         binding.tvArea.visibility = VISIBLE
-        binding.btnFavorites.visibility = VISIBLE
-        binding.tvInstructionsLabel.visibility = VISIBLE
-        binding.tvInstructionsDetails.visibility = View.VISIBLE
-        binding.imgYoutube.visibility = View.VISIBLE
+        binding.btnAddFavorite.visibility = VISIBLE
+        binding.tvInstructionLabel.visibility = VISIBLE
+        binding.tvInstructionDetails.visibility = VISIBLE
+        binding.imgYoutube.visibility = VISIBLE
     }
 }

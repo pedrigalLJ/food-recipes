@@ -45,7 +45,6 @@ class HomeFragment : Fragment() {
 
         viewModel.getRandomMeal()
         observerRandomMeal()
-        onRandomMealClick()
 
     }
 
@@ -71,9 +70,9 @@ class HomeFragment : Fragment() {
                                 .into(binding.imgRandomMeal)
 
                             randomMeal = meal
+                            onRandomMealClick()
+
                         }
-
-
                     }
             }
     }
