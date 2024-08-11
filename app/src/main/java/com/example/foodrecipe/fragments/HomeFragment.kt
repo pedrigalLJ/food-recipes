@@ -8,9 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.foodrecipe.activities.MealActivity
+import com.example.foodrecipe.adapters.CategoryMealAdapter
 import com.example.foodrecipe.adapters.PopularMealAdapter
 import com.example.foodrecipe.databinding.FragmentHomeBinding
 import com.example.foodrecipe.pojo.Meal
@@ -24,6 +26,7 @@ class HomeFragment : Fragment() {
     private lateinit var viewModel: HomeViewModel
     private lateinit var randomMeal: Meal
     private lateinit var popularMealAdapter: PopularMealAdapter
+    private lateinit var categoryMealAdapter: CategoryMealAdapter
 
     companion object {
         const val MEAL_ID = "com.example.foodrecipe.fragments.idMeal"
@@ -35,6 +38,7 @@ class HomeFragment : Fragment() {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
         popularMealAdapter = PopularMealAdapter()
+        categoryMealAdapter = CategoryMealAdapter()
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,8 +60,29 @@ class HomeFragment : Fragment() {
 
         viewModel.getPopularItems()
         observePopularItems()
-
         onPopularItemClick()
+
+        prepareCategoryItemsRecyclerView()
+        viewModel.getCategories()
+        observeCategoryItems()
+
+    }
+
+    private fun prepareCategoryItemsRecyclerView() {
+        binding.rvCategories.apply {
+            layoutManager = GridLayoutManager(context, 3, GridLayoutManager.VERTICAL, false)
+            adapter = categoryMealAdapter
+        }
+    }
+
+    private fun observeCategoryItems() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.categoryMeal.collectLatest { categories ->
+                if (categories != null) {
+                    categoryMealAdapter.setCategoryList(categories)
+                }
+            }
+        }
     }
 
     private fun onPopularItemClick() {
@@ -80,7 +105,7 @@ class HomeFragment : Fragment() {
     private fun observePopularItems() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.popularMeal.collectLatest { meals ->
-                // 'meals' is now a List<CategoryMeals>?
+                // 'meals' is now a List<MealsByCategory>?
                 popularMealAdapter.setMeals(
                     mealList = if (meals != null) ArrayList(meals) else ArrayList()
                 )
